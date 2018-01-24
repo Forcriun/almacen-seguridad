@@ -16,18 +16,22 @@ public class Extintor
     private int peso;
     // La fecha de la ultima revision.
     private LocalDate ultimaRevision;
+    // El identificador del extintor
+    private int id;
 
     /**
      * Constructor for objects of class Extintor
      * @param tipo El tipo a fijar.
      * @param tipo El peso a fijar.
      * @param fechaRevision La fecha de revision en formato "yyyy-mm-dd".
+     * @param id El identificador del extintor.
      */
-    public Extintor(String tipo, int peso, String fechaRevision)
+    public Extintor(String tipo, int peso, String fechaRevision, int id)
     {
         this.tipo = tipo;
         this.peso = peso;
-        ultimaRevision = LocalDate.parse(fechaRevision);        
+        ultimaRevision = LocalDate.parse(fechaRevision);
+        this.id = id;
     }
 
     /**
@@ -81,7 +85,7 @@ public class Extintor
      * un "[X]" delante de la tarea; si no esta completada muestra un "[ ]"
      */
     public String getDatosExtintor(){
-        String datosExtintor =  "Extintor de " + tipo + ". Peso del agente: " + peso + "kg. -- Fecha de la última revisión: " + fechaEsp(ultimaRevision) + "." ;
+        String datosExtintor =  "ID: [" + id + "]. Extintor de " + tipo + ". Peso del agente: " + peso + "kg. -- Fecha de la última revisión: " + fechaEsp(ultimaRevision) + "." ;
         return datosExtintor;
     }
 
