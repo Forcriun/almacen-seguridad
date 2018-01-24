@@ -16,7 +16,7 @@ public class Extintor
     private int peso;
     // La fecha de la ultima revision.
     private LocalDate ultimaRevision;
-    
+
     /**
      * Constructor for objects of class Extintor
      * @param tipo El tipo a fijar.
@@ -74,5 +74,25 @@ public class Extintor
      */
     public void setUltimaRevision(String fechaRevision){
         ultimaRevision = LocalDate.parse(fechaRevision);
+    }
+
+    /**
+     * @return Devuelve la tarea. Si la tarea esta completada, entonces muestra
+     * un "[X]" delante de la tarea; si no esta completada muestra un "[ ]"
+     */
+    public String getDatosExtintor(){
+        String datosExtintor =  "Extintor de " + tipo + ". Peso del agente: " + peso + "kg. -- Fecha de la última revisión: " + fechaEsp(ultimaRevision) + "." ;
+        return datosExtintor;
+    }
+
+    /**
+     * Metodo para dar formato español a las fechas de revision.
+     * @param fechaAFormatear La fecha a formatear.
+     * @return La cadena de la fecha ya formateada.
+     */
+    public String fechaEsp(LocalDate fechaAFormatear){
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd' de 'MMMM' de 'yyyy");        
+        String fechaEspanol = fechaAFormatear.format(formateador);
+        return fechaEspanol;
     }
 }
