@@ -35,4 +35,18 @@ public class Almacen
         almacen.add(new Extintor(tipo,peso,fechaRevision,id));
         id++;
     }
+
+    /**
+     * Muestra todos los elementos de la coleccion y sus datos por pantalla.
+     */
+    public void mostrarExtintores()
+    {
+        // Crea un iterador de la coleccion de extintores.
+        Iterator<Extintor> it = almacen.iterator();
+        while (it.hasNext()){
+            // Inicializa una variable local de tipo Extintor al puntero del iterador.
+            Extintor extintorActual = it.next();
+            System.out.println(extintorActual.getDatosExtintor());
+        }
+    }
 }
