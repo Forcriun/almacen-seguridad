@@ -120,5 +120,44 @@ public class Almacen
             System.out.println("Error: el almacén está vacío.");
         }
     }
+
+    /**
+     * Permite modificar los datos de un extintor especifico del almacen
+     * por medio de su id.
+     * @param id El identificador del extintor.
+     * @param tipo El tipo a fijar: agua/espuma/gas/polvo.
+     * @param tipo El peso a fijar (Kg).
+     * @param fechaRevision La fecha de revision en formato "yyyy-mm-dd".
+     */
+    public void modificarExtintor(int id, String tipo, int peso, String fechaRevision){
+        if(idValido(id)){
+            almacen.get(id-1).setTipo(tipo);
+            almacen.get(id-1).setPeso(peso);
+            almacen.get(id-1).setUltimaRevision(fechaRevision);
+        }
+    }
+
+    /**
+     * Comprueba que el id dado sea valido para el inventario con el que
+     * se trabaja.
+     * @param id El id a comprobar.
+     * @return true si el id es valido, false si no lo es.
+     */
+    private boolean idValido(int id)
+    {
+        boolean valido;
+        if(id < 1) {
+            System.out.println("El id no puede ser menor de 1.");
+            valido = false;
+        }
+        else if(id > almacen.size()) {
+            System.out.println("El id introducido es mayor al tamaño del inventario (" + almacen.size() + ").");
+            valido = false;
+        }
+        else {
+            valido = true;
+        }
+        return valido;
+    }
 }
 
