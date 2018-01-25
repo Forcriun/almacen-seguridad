@@ -78,4 +78,47 @@ public class Almacen
             System.out.println("Error: el almacén está vacío.");
         }
     }
+
+    /**
+     * Muestra un listado ordenado de los extintores del almacen en función
+     * de su ultima fecha de revision (de mas cercana a mas lejana).
+     */
+    public void ordenarPorFechaDeRevisionMasCercana(){
+        ArrayList<Extintor> coleccion = new ArrayList<>();
+        coleccion.addAll(almacen);
+        LocalDate fechaTope = LocalDate.of(1900,01,01); // Fecha exagerada aun sabiendo que los extintores caducan a los 25 años.
+        if (coleccion.size() > 0){
+            while(coleccion.size() > 0){
+                Extintor extMasCercano = coleccion.get(0);
+                int x = 0;  // Contador del bucle
+                int posicionMasCercano = 0;
+                while(x < coleccion.size()){                    
+                    if(coleccion.get(x).getUltimaRevision().isBefore(fechaTope)){   // Elimina fechas inferiores a la tope.
+                        coleccion.remove(x);
+                    }
+                    else if(coleccion.get(x).getUltimaRevision().isBefore(LocalDate.now().plusDays(1))){    // Considera el dia actual
+                        if(coleccion.get(x).getUltimaRevision().isAfter(extMasCercano.getUltimaRevision())){
+                            extMasCercano = coleccion.get(x);
+                            posicionMasCercano = x;
+                        }
+                        x++;
+                    }
+                    else{   // Elimina fechas posteriores al dia actual
+                        coleccion.remove(x);
+                    }
+                }
+                if(!coleccion.isEmpty()){
+                    System.out.println(coleccion.get(posicionMasCercano).getDatosExtintor());
+                    coleccion.remove(posicionMasCercano);
+                }
+                else{
+                    System.out.println("Error: las fechas a ordenar no son válidas.");                
+                }
+            }
+        }
+        else{
+            System.out.println("Error: el almacén está vacío.");
+        }
+    }
 }
+
