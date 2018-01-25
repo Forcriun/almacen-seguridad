@@ -159,5 +159,19 @@ public class Almacen
         }
         return valido;
     }
+
+    /**
+     * Elimina los extintores del tipo introducido que haya en el inventario.
+     * @param tipoAEliminar El tipo que se quiere eliminar (agua/espuma/gas/polvo).
+     */
+    public void eliminarPorTipo(String tipoAEliminar){
+        Iterator<Extintor> it = almacen.iterator();
+        while(it.hasNext()){
+            Extintor extintorActual = it.next();
+            if(extintorActual.getTipo().toLowerCase().contains(tipoAEliminar.toLowerCase())){
+                it.remove();
+            }
+        }
+    }
 }
 
