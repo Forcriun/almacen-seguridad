@@ -62,8 +62,12 @@ public class Almacen
                 Extintor extMasPesado = coleccion.get(0);
                 int x = 0;  // Contador del bucle
                 int posicionMasPesado = 0;
-                while(x < coleccion.size()){                
-                    if(coleccion.get(x).getPeso() >= extMasPesado.getPeso()){
+                while(x < coleccion.size()){
+                    if(coleccion.get(x).getPeso() < 1){
+                        coleccion.remove(x);
+                        x--;
+                    }
+                    else if(coleccion.get(x).getPeso() >= extMasPesado.getPeso()){
                         extMasPesado = coleccion.get(x);
                         posicionMasPesado = x;
                     }
