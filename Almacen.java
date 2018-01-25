@@ -49,4 +49,33 @@ public class Almacen
             System.out.println(extintorActual.getDatosExtintor());
         }
     }
+
+    /**
+     * Muestra un listado ordenado de los extintores del almacen en función
+     * de su peso (de mayor a menor).
+     */
+    public void ordenarDeMayorAMenorPorPeso(){
+        ArrayList<Extintor> coleccion = new ArrayList<>();
+        coleccion.addAll(almacen);
+        if (coleccion.size() > 0){
+            while(coleccion.size() > 0){    // Da tantas vueltas como objetos en la coleccion.
+                Extintor extMasPesado = coleccion.get(0);
+                int x = 0;  // Contador del bucle
+                int posicionMasPesado = 0;
+                while(x < coleccion.size()){                
+                    if(coleccion.get(x).getPeso() >= extMasPesado.getPeso()){
+                        extMasPesado = coleccion.get(x);
+                        posicionMasPesado = x;
+                    }
+                    x++;
+                }
+                // Imprime y borra solo el de mayor peso en el ciclo actual.
+                System.out.println(coleccion.get(posicionMasPesado).getDatosExtintor());
+                coleccion.remove(posicionMasPesado);
+            }
+        }
+        else{
+            System.out.println("Error: el almacén está vacío.");
+        }
+    }
 }
