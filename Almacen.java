@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import java.util.Scanner;
 import java.io.File;
@@ -28,7 +29,7 @@ public class Almacen
         almacen = new ArrayList<Extintor>();
         id = 1;
     }
-    
+
     /**
      * Constructor con parametro para los objetos de la clase Almacen
      * @param txt Nombre del archivo externo con los datos de los objetos del
@@ -194,7 +195,7 @@ public class Almacen
             }
         }
     }
-    
+
     /**
      * Añade un listado de extintores al almacen. Los datos se obtienen 
      * escaneando un archivo de texto plano externo en el directorio del proyecto.
@@ -216,6 +217,30 @@ public class Almacen
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Metodo que muestra por pantalla los extintores del almacen agrupados
+     * por su peso.
+     */   
+    public void agrupaPorPeso(){
+        HashSet<Integer> conjuntosPeso = new HashSet<>();
+
+        for(Extintor extintor : almacen){
+            conjuntosPeso.add(extintor.getPeso());
+        }
+
+        for(Integer categoriaPeso : conjuntosPeso){
+            System.out.println("Extintores de " + categoriaPeso + "kg:");
+            int x = 0;  // contador del bucle
+            while(x < almacen.size()){
+                if(almacen.get(x).getPeso() == categoriaPeso){
+                    System.out.println(almacen.get(x).getDatosExtintor());
+                }                
+                x++;
+            }
+            System.out.println();
+        }
     }
 }
 
