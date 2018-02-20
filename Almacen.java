@@ -221,11 +221,12 @@ public class Almacen
 
     /**
      * Metodo que muestra por pantalla los extintores del almacen agrupados
-     * por su peso.
+     * por su peso, previa ordenacion alfabetica.
      */   
     public void agrupaPorPeso(){
         HashSet<Integer> conjuntosPeso = new HashSet<>();
-
+        almacen = ordenaAlfabeticamentePorTipo(almacen);
+        
         for(Extintor extintor : almacen){
             conjuntosPeso.add(extintor.getPeso());
         }
@@ -236,11 +237,38 @@ public class Almacen
             while(x < almacen.size()){
                 if(almacen.get(x).getPeso() == categoriaPeso){
                     System.out.println(almacen.get(x).getDatosExtintor());
-                }                
+                }
                 x++;
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Metodo que ordena los extintores del almacen que recibe por parametro
+     * alfabeticamente segun el tipo.
+     * @param coleccion El almacen a ordenar.
+     * @return El almacen ya ordenado.
+     */
+    public ArrayList<Extintor> ordenaAlfabeticamentePorTipo(ArrayList<Extintor> coleccion){
+        ArrayList<Extintor> copiaAlmacen = new ArrayList<>(coleccion);
+        ArrayList<Extintor> aDevolver = new ArrayList<>();
+
+        while(copiaAlmacen.size() > 0){
+            Extintor extMasAlf = null;
+            String tipoReferencia = copiaAlmacen.get(0).getTipo();                
+
+            for (Extintor ext : copiaAlmacen){
+                if (ext.getTipo().compareTo(tipoReferencia) <= 0){
+                    tipoReferencia = ext.getTipo();
+                    extMasAlf = ext;
+                }
+            }
+            aDevolver.add(extMasAlf);
+            copiaAlmacen.remove(extMasAlf);
+        }
+        
+        return aDevolver;
     }
 }
 
