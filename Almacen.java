@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.Arrays;
+
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Clase que representa un almacen de objetos de la clase Extintor.
@@ -22,6 +27,18 @@ public class Almacen
     {
         almacen = new ArrayList<Extintor>();
         id = 1;
+    }
+    
+    /**
+     * Constructor con parametro para los objetos de la clase Almacen
+     * @param txt Nombre del archivo externo con los datos de los objetos del
+     * almacen. Escriba el nombre del archivo con su extension ("archivo.txt").
+     */
+    public Almacen(String txt)
+    {
+        almacen = new ArrayList<Extintor>();
+        id = 1;
+        fileParser(txt);
     }
 
     /**
@@ -176,6 +193,29 @@ public class Almacen
                 it.remove();
             }
         }
+    }
+    
+    /**
+     * Añade un listado de extintores al almacen. Los datos se obtienen 
+     * escaneando un archivo de texto plano externo en el directorio del proyecto.
+     * @param txt Nombre del archivo externo. Escriba el nombre del archivo
+     * con su extension ("archivo.txt").
+     */
+    public void fileParser(String txt)
+    {
+        try {
+            File archivo = new File(txt);
+            Scanner sc = new Scanner(archivo);
+            while (sc.hasNextLine()) {
+                String[] arrayDatosExtintor = sc.nextLine().split(" # ");
+                addExtintor(arrayDatosExtintor[0], Integer.parseInt(arrayDatosExtintor[1]), arrayDatosExtintor[2]);
+            }
+            sc.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
